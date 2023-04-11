@@ -1,0 +1,14 @@
+{
+  "name": "starterpack-banshee56",
+  "version": "1.0.0",
+  "description": "Short Assignment 2",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^4.2.1"
+  }
+}
