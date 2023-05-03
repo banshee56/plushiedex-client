@@ -4,11 +4,14 @@
 
 body, html {
   font-family: "Roboto", sans-serif;
-  background: #FFC700;
+  background: white;
   height: 100%;
   padding: 0;
   margin: 0;
-  color: white;
+  color: #FFC700;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 ul {
@@ -21,7 +24,10 @@ ul {
 }
 
 .icon {
-  color: white;
+  -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  color: #FFC700;
   width: 50px;
   height: 50px;
   transition: all .2s ease-in-out;
@@ -38,5 +44,41 @@ ul {
 
 .nav-item {
   text-decoration: none;
+}
+
+.container {
+  margin: 4em;
+}
+
+.name-photo {
+  display: flex;
+}
+
+.textbox, .content-textbox {
+  width: 60%;
+  height: 30px;
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 32px;
+  padding: 1em;
+
+  &::placeholder {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    color: rgba($color: #FFC700, $alpha: 0.8);
+  }
+  
+}
+
+.submit-button {
+  width: 100%;
+  padding: 1em;
+  border: none;
+  border-radius: 10px;
+  font-size: large;
+  background-color: #FFC700;
+  color: white;
 }
   

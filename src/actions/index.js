@@ -1,19 +1,40 @@
 // keys for actiontypes
+// export const ActionTypes = {
+//   INCREMENT: 'INCREMENT',
+//   DECREMENT: 'DECREMENT',
+// };
 export const ActionTypes = {
-  INCREMENT: 'INCREMENT',
-  DECREMENT: 'DECREMENT',
+  FETCH_POSTS: 'FETCH_POSTS',
+  FETCH_POST: 'FETCH_POST',
+  // UPDATE_POST: 'UPDATE_POST',
+  // CREATE_POST: 'CREATE_POST',
+  // DELETE_POST: 'DELETE_POST',
 };
 
-export function increment() {
+export function fetchPost() {
   return {
-    type: ActionTypes.INCREMENT,
+    type: ActionTypes.FETCH_POST,
     payload: null,
   };
 }
 
-export function decrement() {
+export function fetchPosts() {
   return {
-    type: ActionTypes.DECREMENT,
+    type: ActionTypes.FETCH_POSTS,
     payload: null,
   };
 }
+
+// export function increment() {
+//   return {
+//     type: ActionTypes.INCREMENT,
+//     payload: null,
+//   };
+// }
+
+// export function decrement() {
+//   return {
+//     type: ActionTypes.DECREMENT,
+//     payload: null,
+//   };
+// }

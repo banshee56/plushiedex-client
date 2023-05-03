@@ -5,7 +5,7 @@ export default function Posts() {
   const [posts, setPosts] = useState({});
 
   return (
-    <div>
+    <div className="container">
       <h1>Posts</h1>
       <div className="posts-container">
         {Object.entries(posts).map(([i, post]) => {
