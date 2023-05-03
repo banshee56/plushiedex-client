@@ -4,11 +4,6 @@ import axios from 'axios';
 const ROOT_URL = 'https://platform.cs52.me/api';
 const API_KEY = '?key=yourfirstname_yourlastname';
 
-// async function getResponse() {
-//   const response = await axios.get(`${ROOT_URL}/posts${API_KEY}`);
-//   console.log(response);
-// }
-
 // keys for actiontypes
 export const ActionTypes = {
   FETCH_POSTS: 'FETCH_POSTS',
@@ -22,11 +17,12 @@ export const ActionTypes = {
 export function fetchPosts() { /* axios get */
   return async (dispatch) => {
     // get
-    const getRes = await axios.get(`${ROOT_URL}/posts${API_KEY}`);
+    const result = await axios.get(`${ROOT_URL}/posts${API_KEY}`);
+    console.log(result.data);
 
     dispatch({
       type: ActionTypes.FETCH_POSTS,
-      payload: getRes,
+      payload: result.data,
     });
   };
 }
@@ -37,11 +33,11 @@ export function createPost(post, navigate) { /* axios post */
     const fields = {
       title: post.title, content: post.content, coverUrl: post.coverURL, tags: post.tags,
     };
-    const postRes = await axios.post(`${ROOT_URL}/posts${API_KEY}`, fields);
+    const result = await axios.post(`${ROOT_URL}/posts${API_KEY}`, fields);
 
     dispatch({
       type: ActionTypes.FETCH_POSTS,
-      payload: postRes,
+      payload: result.data,
     });
 
     // navigate to Posts page
@@ -55,11 +51,11 @@ export function updatePost(post) { /* axios put */
     const fields = {
       title: post.title, content: post.content, coverUrl: post.coverURL, tags: post.tags,
     };
-    const putRes = await axios.post(`${ROOT_URL}/posts${API_KEY}`, fields);
+    const result = await axios.post(`${ROOT_URL}/posts${API_KEY}`, fields);
 
     dispatch({
       type: ActionTypes.FETCH_POSTS,
-      payload: putRes,
+      payload: result.data,
     });
   };
 }
@@ -67,11 +63,11 @@ export function updatePost(post) { /* axios put */
 export function fetchPost(id) { /* axios get */
   return async (dispatch) => {
     // get
-    const getRes = await axios.get(`${ROOT_URL}/posts${API_KEY}/${id}`);
+    const result = await axios.get(`${ROOT_URL}/posts${API_KEY}/${id}`);
 
     dispatch({
       type: ActionTypes.FETCH_POSTS,
-      payload: getRes,
+      payload: result.data,
     });
   };
 }
@@ -79,11 +75,11 @@ export function fetchPost(id) { /* axios get */
 export function deletePost(id, navigate) { /* axios delete */
   return async (dispatch) => {
     // delete
-    const getRes = await axios.delete(`${ROOT_URL}/posts${API_KEY}/${id}`);
+    const result = await axios.delete(`${ROOT_URL}/posts${API_KEY}/${id}`);
 
     dispatch({
       type: ActionTypes.FETCH_POSTS,
-      payload: getRes,
+      payload: result.data,
     });
 
     // navigate to Posts page
