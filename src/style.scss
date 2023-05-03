@@ -55,12 +55,12 @@ ul {
 }
 
 .textbox, .content-textbox {
-  width: 60%;
+  width: 80%;
   height: 30px;
   background-color: white;
   border: none;
   border-radius: 10px;
-  font-size: 32px;
+  font-size: 24px;
   padding: 1em;
 
   &::placeholder {
@@ -68,6 +68,7 @@ ul {
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     color: rgba($color: #FFC700, $alpha: 0.8);
+    
   }
   
 }
@@ -82,3 +83,8 @@ ul {
   color: white;
 }
   
+@media only screen and (max-width: 600px)  {
+  .name-photo {
+    flex-direction: column;
+  }
+}
