@@ -8,26 +8,51 @@ const API_KEY = '?key=yourfirstname_yourlastname';
 export const ActionTypes = {
   FETCH_POSTS: 'FETCH_POSTS',
   FETCH_POST: 'FETCH_POST',
-  // UPDATE_POST: 'UPDATE_POST',
-  // CREATE_POST: 'CREATE_POST',
-  // DELETE_POST: 'DELETE_POST',
+  UPDATE_POST: 'UPDATE_POST',
+  CREATE_POST: 'CREATE_POST',
+  DELETE_POST: 'DELETE_POST',
 };
 
 // action creators
-export function fetchPosts() { /* axios get */
-  return async (dispatch) => {
-    // get
-    const result = await axios.get(`${ROOT_URL}/posts${API_KEY}`);
-    console.log(result.data);
+// export function fetchPosts() { /* axios get */
+//   return async (dispatch) => {
+//     // get
+//     const result = await axios.get(`${ROOT_URL}/posts${API_KEY}`);
+//     console.log(result.data);
 
-    dispatch({
-      type: ActionTypes.FETCH_POSTS,
-      payload: result.data,
-    });
+//     dispatch({
+//       type: ActionTypes.FETCH_POSTS,
+//       payload: result.data,
+//     });
+//   };
+// }
+
+// trying this out in async await format
+export function fetchPosts() {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`${ROOT_URL}/posts${API_KEY}`);
+      console.log(2);
+      console.log('actionCreator');
+      console.log(response.data);
+      dispatch({ type: ActionTypes.FETCH_POSTS, payload: response.data });
+    } catch (error) {
+      console.log('error');
+    }
   };
 }
 
+// // as react doesn't let you pass in an async function to useEffect so you have to wrap the fetch call like so
+// useEffect(() => {
+//   const fetch = async () => {
+//     await dispatch(fetchPost(params.postID));
+//     setLoadedState(true); // or some followup
+//   };
+//   fetch();
+// }, []);
+
 export function createPost(post, navigate) { /* axios post */
+  console.log('hi');
   return async (dispatch) => {
     // post
     const fields = {
@@ -36,10 +61,11 @@ export function createPost(post, navigate) { /* axios post */
     const result = await axios.post(`${ROOT_URL}/posts${API_KEY}`, fields);
 
     dispatch({
-      type: ActionTypes.FETCH_POSTS,
+      type: ActionTypes.CREATE_POST,
       payload: result.data,
     });
 
+    console.log('here');
     // navigate to Posts page
     navigate('/');
   };
@@ -54,7 +80,7 @@ export function updatePost(post) { /* axios put */
     const result = await axios.post(`${ROOT_URL}/posts${API_KEY}`, fields);
 
     dispatch({
-      type: ActionTypes.FETCH_POSTS,
+      type: ActionTypes.UPDATE_POST,
       payload: result.data,
     });
   };
@@ -66,7 +92,7 @@ export function fetchPost(id) { /* axios get */
     const result = await axios.get(`${ROOT_URL}/posts${API_KEY}/${id}`);
 
     dispatch({
-      type: ActionTypes.FETCH_POSTS,
+      type: ActionTypes.FETCH_POST,
       payload: result.data,
     });
   };
@@ -78,7 +104,7 @@ export function deletePost(id, navigate) { /* axios delete */
     const result = await axios.delete(`${ROOT_URL}/posts${API_KEY}/${id}`);
 
     dispatch({
-      type: ActionTypes.FETCH_POSTS,
+      type: ActionTypes.DELETE_POST,
       payload: result.data,
     });
 

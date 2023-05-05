@@ -1,6 +1,4 @@
-import {
-  BrowserRouter, Routes, Route, NavLink,
-} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import React from 'react';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
@@ -21,6 +19,7 @@ export default function Nav(props) {
                 transition: { duration: 0.5 },
               }}
               whileTap={{ scale: 0.9 }}
+              className="home-container"
             >
               <Icon icon="mdi:teddy-bear" className="icon" onClick={changeColor} />
             </motion.div>
