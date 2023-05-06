@@ -30,14 +30,14 @@ export const ActionTypes = {
 // trying this out in async await format
 export function fetchPosts() {
   return async (dispatch) => {
+    console.log(2);
+    console.log('actionCreator');
     try {
       const response = await axios.get(`${ROOT_URL}/posts${API_KEY}`);
-      console.log(2);
-      console.log('actionCreator');
       console.log(response.data);
       dispatch({ type: ActionTypes.FETCH_POSTS, payload: response.data });
     } catch (error) {
-      console.log('error');
+      console.log(error);
     }
   };
 }

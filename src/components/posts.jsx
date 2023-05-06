@@ -14,10 +14,11 @@ export default function Posts() {
     console.log('useEffect');
 
     const fetchAll = async () => {
-      const res = await dispatch(fetchPosts());
+      console.log(await dispatch(fetchPosts()));
+      // const res = await dispatch(fetchPosts());
       setLoaded(true);
       console.log('received results');
-      console.log(res);
+      // console.log(res);
     };
 
     fetchAll();

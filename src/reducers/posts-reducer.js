@@ -1,22 +1,13 @@
+/* eslint-disable default-param-last */
+/* eslint-disable no-param-reassign */
 import React, { useState } from 'react';
 import { produce } from 'immer';
 import { ActionTypes } from '../actions';
 
 // const PostsReducer = (initialState = { all: [], current: {} }, action = {}) => {
-//   // setState(
-//   //   produce((draft) => {
-//   //     // eslint-disable-next-line no-param-reassign
-//   //     draft = [...state.all, action.payload];
-//   //   }),
-//   // );
 //   const state = initialState;
-//   console.log(state);
-//   state.all = produce(initialState, (draft) => {
-//     // eslint-disable-next-line no-param-reassign
-//     // return action.payload;
-//     [].concat(state, action.payload);
-//   });
-//   console.log(state);
+//   state.all = action.payload;
+//   state.current = {};
 
 //   switch (action.type) {
 //     case ActionTypes.FETCH_POSTS:
@@ -30,22 +21,61 @@ import { ActionTypes } from '../actions';
 //   }
 // };
 
-// eslint-disable-next-line default-param-last
-const PostsReducer = (state = { all: [], current: {} }, action) => produce(state, (draft) => {
+// const PostsReducer = (state = { all: [], current: {} }, action) => {
+//   console.log(3);
+//   console.log('reducer');
+//   switch (action.type) {
+//     case ActionTypes.FETCH_POSTS:
+//       console.log('sending');
+//       return produce(state, (draftState) => {
+//         draftState.all.push(action.payload);
+//         console.log(draftState);
+//       });
+
+//     case ActionTypes.FETCH_POST:
+//       return state.current;
+
+//     default:
+//       return state;
+//   }
+// };
+
+const PostsReducer = (state = { all: [], current: {} }, action) => {
   console.log(3);
   console.log('reducer');
+  console.log(state);
   switch (action.type) {
     case ActionTypes.FETCH_POSTS:
-      // eslint-disable-next-line no-param-reassign
-      // draft.all = action.payload;
       console.log('sending');
-      console.log(draft.all);
-      return state;
+      return produce(state, (draftState) => {
+        draftState.all.push({
+          id: '123', title: 'nooo', tags: 'b', content: 'b',
+        });
+      });
+
     case ActionTypes.FETCH_POST:
       return state.current;
+
     default:
       return state;
   }
-});
+};
+
+// const PostsReducer = produce((draft = { all: [], current: {} }, action) => {
+//   console.log(3);
+//   console.log('reducer');
+
+//   switch (action.type) {
+//     case ActionTypes.FETCH_POSTS:
+//       draft.all.push(...action.payload);
+//       return draft;
+
+//     case ActionTypes.FETCH_POST:
+//       return draft;
+
+//     default:
+//       return draft;
+//   }
+// });
 
 export default PostsReducer;

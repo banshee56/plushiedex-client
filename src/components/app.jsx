@@ -17,7 +17,7 @@ export default function App(props) {
           <Route path="/" element={<Posts />} />
           <Route path="/posts/new" element={<NewPost />} />
           <Route path="/posts/:postID" element={<Post />} />
-          <Route path="*" element={<div>Post not found </div>} />
+          <Route path="*" element={<div> Post not found </div>} />
         </Routes>
       </div>
     </BrowserRouter>
