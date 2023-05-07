@@ -1,8 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import TextareaAutosize from 'react-textarea-autosize';
-
 import { useDispatch } from 'react-redux';
 import { createPost } from '../actions';
 
@@ -30,8 +28,11 @@ export default function NewPost() {
       </div>
 
       <input type="textbox" placeholder="Tags" className="textbox" id="tags" />
-      <TextareaAutosize autoFocus placeholder="Describe Your New Plushie" className="content-textbox" minRows={6} id="content" />
-      {/* <input type="textbox" placeholder="Describe Your New Plushie" className="content-textbox" id="content" /> */}
+      <textarea
+        id="content"
+        className="content-textbox"
+        placeholder="Describe Your New Plushie"
+      />
 
       <div>
         <motion.input type="button"
