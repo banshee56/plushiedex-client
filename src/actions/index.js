@@ -8,9 +8,9 @@ const API_KEY = '?key=yourfirstname_yourlastname';
 export const ActionTypes = {
   FETCH_POSTS: 'FETCH_POSTS',
   FETCH_POST: 'FETCH_POST',
-  UPDATE_POST: 'UPDATE_POST',
-  CREATE_POST: 'CREATE_POST',
-  DELETE_POST: 'DELETE_POST',
+  // UPDATE_POST: 'UPDATE_POST',
+  // CREATE_POST: 'CREATE_POST',
+  // DELETE_POST: 'DELETE_POST',
 };
 
 // action creators
@@ -28,17 +28,31 @@ export const ActionTypes = {
 // }
 
 // trying this out in async await format
+// export function fetchPosts() {
+//   return async (dispatch) => {
+//     console.log(2);
+//     console.log('actionCreator');
+//     try {
+//       const response = await axios.get(`${ROOT_URL}/posts${API_KEY}`);
+//       console.log(response.data);
+//       dispatch({ type: ActionTypes.FETCH_POSTS, payload: response.data });
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// }
+
 export function fetchPosts() {
-  return async (dispatch) => {
+  return (dispatch) => {
     console.log(2);
     console.log('actionCreator');
-    try {
-      const response = await axios.get(`${ROOT_URL}/posts${API_KEY}`);
-      console.log(response.data);
-      dispatch({ type: ActionTypes.FETCH_POSTS, payload: response.data });
-    } catch (error) {
-      console.log(error);
-    }
+    axios.get(`${ROOT_URL}/posts${API_KEY}`)
+      .then((response) => {
+        dispatch({ type: ActionTypes.FETCH_POSTS, payload: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 }
 
