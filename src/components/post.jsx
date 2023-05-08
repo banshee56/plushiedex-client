@@ -29,11 +29,13 @@ export default function Post(props) {
     setEditing(!isEditing);
   };
 
-  const updateField = (event) => {
-    const updated = {
-      title: event.target.value, content: post.content, coverUrl: post.coverURL, tags: post.tags,
-    };
-    dispatch(updatePost(updated, postID));
+  const updateField = (event, field) => {
+    if (field === 'name') {
+      const updated = {
+        title: event.target.value, content: post.content, coverUrl: post.coverURL, tags: post.tags,
+      };
+      dispatch(updatePost(updated, postID));
+    }
   };
 
   const renderContent = () => {
@@ -41,19 +43,17 @@ export default function Post(props) {
       return (
         <div className="column-container">
           <div className="label-input">
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label htmlFor="name"> Name:</label>
-            <input type="text" className="textbox" id="name" onChange={updateField} />
+            <label htmlFor="name"> Name:<input type="text" className="textbox" id="name" onChange={(e) => updateField(e, 'name')} /></label>
           </div>
 
           <label htmlFor="photo-url">
             Photo URL:
-            <input type="text" className="textbox" id="photo-url" onChange={updateField} />
+            <input type="text" className="textbox" id="photo-url" onChange={(e) => updateField(e, 'photo-url')} />
           </label>
 
           <label htmlFor="tags">
             Tags:
-            <input type="text" className="textbox" id="tags" onChange={updateField} />
+            <input type="text" className="textbox" id="tags" onChange={(e) => updateField(e, 'tags')} />
           </label>
 
           <label htmlFor="tags">
@@ -62,7 +62,7 @@ export default function Post(props) {
               id="content"
               className="content-textbox"
               value={post.content}
-              onChange={updateField}
+              onChange={(e) => updateField(e, 'content')}
             />
           </label>
 
