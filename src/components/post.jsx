@@ -39,31 +39,6 @@ export default function Post(props) {
     dispatch(updatePost(updated, postID));
   };
 
-  // const changeContentEdit = (e) => {
-  //   e.preventDefault();
-  //   console.log('clicking content');
-  //   setContentEdit(!contentEdit);
-  // };
-
-  // const onContentChange = (event) => {
-  //   const updated = {
-  //     title: post.title, content: event.target.value, coverUrl: post.coverURL, tags: post.tags,
-  //   };
-  //   dispatch(updatePost(updated, postID));
-  // };
-
-  // const changeTagsEdit = (e) => {
-  //   e.preventDefault();
-  //   setTagsEdit(!tagsEdit);
-  // };
-
-  // const onTagsChange = (event) => {
-  //   const updated = {
-  //     title: post.title, content: post.content, coverUrl: post.coverURL, tags: event.target.value,
-  //   };
-  //   dispatch(updatePost(updated, postID));
-  // };
-
   const renderTitle = () => {
     if (titleEdit) {
       return (
@@ -79,6 +54,63 @@ export default function Post(props) {
     }
   };
 
+  const changeContentEdit = (e) => {
+    e.preventDefault();
+    console.log('clicking content');
+    setContentEdit(!contentEdit);
+  };
+
+  const onContentChange = (event) => {
+    const updated = {
+      title: post.title, content: event.target.value, coverUrl: post.coverURL, tags: post.tags,
+    };
+    dispatch(updatePost(updated, postID));
+  };
+
+  const renderContent = () => {
+    if (contentEdit) {
+      return (
+        <form onSubmit={changeContentEdit}>
+          <textarea />
+        </form>
+
+      );
+    } else {
+      return (
+        // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+        <div onClick={changeContentEdit}>
+          <ReactMarkdown className="post-text">{post.content}</ReactMarkdown>
+        </div>
+      );
+    }
+  };
+
+  const changeTagsEdit = (e) => {
+    e.preventDefault();
+    setTagsEdit(!tagsEdit);
+  };
+
+  const onTagsChange = (event) => {
+    const updated = {
+      title: post.title, content: post.content, coverUrl: post.coverURL, tags: event.target.value,
+    };
+    dispatch(updatePost(updated, postID));
+  };
+
+  const renderTags = () => {
+    if (tagsEdit) {
+      return (
+        <form onSubmit={changeTagsEdit}>
+          <input type="textbox" className="title-textbox" onChange={onTagsChange} />
+        </form>
+
+      );
+    } else {
+      return (
+        <p onClick={changeTagsEdit}>{post.tags}</p>
+      );
+    }
+  };
   return (
     <div className="page-container">
       <div className="icon-bar">
@@ -91,9 +123,11 @@ export default function Post(props) {
       <div className="post-container">
         {renderTitle()}
         <img src={post.coverUrl} className="cover-photo" />
-        <ReactMarkdown className="post-text">{post.content}</ReactMarkdown>
+        {renderContent()}
+        {renderTags()}
+        {/* <ReactMarkdown className="post-text">{post.content}</ReactMarkdown> */}
 
-        <p>{post.tags}</p>
+        {/* <p>{post.tags}</p> */}
       </div>
 
     </div>
