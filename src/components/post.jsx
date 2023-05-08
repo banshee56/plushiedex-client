@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, NavLink, useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import ReactMarkdown from 'react-markdown';
-import { deletePost, fetchPost } from '../actions';
+import { deletePost, fetchPost, updatePost } from '../actions';
 
 export default function Post(props) {
   const { postID } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const [titleEdit, setTitleEdit] = useState(false);
+  const [titleEdit, setTitleEdit] = useState(false);
   // const [contentEdit, setContentEdit] = useState(false);
   // const [tagsEdit, setTagsEdit] = useState(false);
   // const [urlEdit, setUrlEdit] = useState(false);
@@ -23,26 +23,25 @@ export default function Post(props) {
     fetch();
   }, []);
 
-  // const onInputSubmit = () => {
+  const changeEdit = () => {
+    setTitleEdit(!titleEdit);
+  };
 
-  // };
+  const renderTitle = () => {
+    console.log(titleEdit);
+    if (titleEdit) {
+      return (
+        <form onSubmit={() => dispatch(updatePost(postID))}>
+          <input type="textbox" className="title-textbox" />
+        </form>
 
-  // const renderText = (edit) => {
-  //   if (edit) {
-  //     return (
-  //       <form onSubmit={onInputSubmit}>
-  //         <textarea />
-  //       </form>
-
-  //     );
-  //   } else {
-  //     return (
-  //       <div className="note-text" role="textbox" tabIndex={0}>
-  //         <ReactMarkdown>{post.content}</ReactMarkdown>
-  //       </div>
-  //     );
-  //   }
-  // };
+      );
+    } else {
+      return (
+        <h1 onClick={changeEdit}>{post.title}</h1>
+      );
+    }
+  };
 
   if (!post) {
     return <div className="page-container">ID: {postID}</div>;
@@ -60,7 +59,9 @@ export default function Post(props) {
       </div>
 
       <div className="post-container">
-        <h1>{post.title}</h1>
+        {renderTitle()}
+
+        {/* <h1>{post.title}</h1> */}
         <img src={post.coverUrl} className="cover-photo" />
         <ReactMarkdown className="post-text">{post.content}</ReactMarkdown>
 

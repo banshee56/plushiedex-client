@@ -129,8 +129,12 @@ a {
   flex-direction: column;
   color: white;
   
-  h1 {
+  h1, {
     font-size: 24px;
+  }
+
+  .title-textbox {
+    border-radius: 20px;
   }
 
   img {
