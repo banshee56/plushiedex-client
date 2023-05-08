@@ -129,7 +129,7 @@ a {
   flex-direction: column;
   color: white;
   
-  h1, {
+  h1 {
     font-size: 24px;
   }
 
@@ -164,10 +164,16 @@ a {
 // as displayed on post page
 .post-container {
   margin: 2em;
+  display: flex;
+  flex-direction: column;
 
   h1 {
     font-size:48px;
     margin: 0;
+  }
+
+  img {
+    align-self: flex-start;
   }
 
   .cover-photo {
@@ -178,6 +184,8 @@ a {
   .post-text {
     font-size: 24px;
   }
+
+
 }
 
 

@@ -47,13 +47,14 @@ export function createPost(post, navigate) { /* axios post */
   };
 }
 
-export function updatePost(post) { /* axios put */
+export function updatePost(post, id) { /* axios put */
   const fields = {
     title: post.title, content: post.content, coverUrl: post.coverURL, tags: post.tags,
   };
+
   return async (dispatch) => {
     // put
-    axios.put(`${ROOT_URL}/posts${API_KEY}`, fields).then(dispatch(fetchPost()));
+    axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, fields).then(dispatch(fetchPost(id)));
   };
 }
 

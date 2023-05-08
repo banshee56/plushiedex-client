@@ -11,9 +11,9 @@ export default function Post(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [titleEdit, setTitleEdit] = useState(false);
-  // const [contentEdit, setContentEdit] = useState(false);
-  // const [tagsEdit, setTagsEdit] = useState(false);
-  // const [urlEdit, setUrlEdit] = useState(false);
+  const [contentEdit, setContentEdit] = useState(false);
+  const [tagsEdit, setTagsEdit] = useState(false);
+  const [urlEdit, setUrlEdit] = useState(false);
   const post = useSelector((reduxState) => (reduxState.posts.current));
 
   useEffect(() => {
@@ -23,31 +23,61 @@ export default function Post(props) {
     fetch();
   }, []);
 
-  const changeEdit = () => {
+  if (!post) {
+    return <div className="page-container">ID: {postID}</div>;
+  }
+
+  const changeTitleEdit = (e) => {
+    e.preventDefault();
     setTitleEdit(!titleEdit);
   };
 
+  const onTitleChange = (event) => {
+    const updated = {
+      title: event.target.value, content: post.content, coverUrl: post.coverURL, tags: post.tags,
+    };
+    dispatch(updatePost(updated, postID));
+  };
+
+  // const changeContentEdit = (e) => {
+  //   e.preventDefault();
+  //   console.log('clicking content');
+  //   setContentEdit(!contentEdit);
+  // };
+
+  // const onContentChange = (event) => {
+  //   const updated = {
+  //     title: post.title, content: event.target.value, coverUrl: post.coverURL, tags: post.tags,
+  //   };
+  //   dispatch(updatePost(updated, postID));
+  // };
+
+  // const changeTagsEdit = (e) => {
+  //   e.preventDefault();
+  //   setTagsEdit(!tagsEdit);
+  // };
+
+  // const onTagsChange = (event) => {
+  //   const updated = {
+  //     title: post.title, content: post.content, coverUrl: post.coverURL, tags: event.target.value,
+  //   };
+  //   dispatch(updatePost(updated, postID));
+  // };
+
   const renderTitle = () => {
-    console.log(titleEdit);
     if (titleEdit) {
       return (
-        <form onSubmit={() => dispatch(updatePost(postID))}>
-          <input type="textbox" className="title-textbox" />
+        <form onSubmit={changeTitleEdit}>
+          <input type="textbox" className="title-textbox" onChange={onTitleChange} />
         </form>
 
       );
     } else {
       return (
-        <h1 onClick={changeEdit}>{post.title}</h1>
+        <h1 onClick={changeTitleEdit}>{post.title}</h1>
       );
     }
   };
-
-  if (!post) {
-    return <div className="page-container">ID: {postID}</div>;
-  }
-
-  console.log(post);
 
   return (
     <div className="page-container">
@@ -60,8 +90,6 @@ export default function Post(props) {
 
       <div className="post-container">
         {renderTitle()}
-
-        {/* <h1>{post.title}</h1> */}
         <img src={post.coverUrl} className="cover-photo" />
         <ReactMarkdown className="post-text">{post.content}</ReactMarkdown>
 
