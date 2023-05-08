@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable no-unused-expressions */
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,6 +23,7 @@ export default function Posts(props) {
   return (
     <div className="page-container">
       <h1>PlushieDex</h1>
+      <h2>Like a PokeDex but for plushies! List the plushies you&apos;ve caught and the ones you&apos;re still wanting.</h2>
       {console.log(4)}
       {console.log('posts')}
       {console.log(allPosts)}

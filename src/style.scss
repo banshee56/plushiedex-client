@@ -52,6 +52,13 @@ a {
   display: flex;
   flex-direction: column;
   gap: 1em;
+
+  h2 {
+    text-decoration: none;
+    font-size: 20px;
+    margin: 0;
+    padding-bottom: 1em;
+  }
 }
 
 .name-photo {
@@ -177,8 +184,8 @@ a {
   }
 
   .cover-photo {
-    max-width: 80vw;
-    max-height: 50vw;
+    max-width: 40vw;
+    max-height: 40vw;
   }
 
   .post-text {

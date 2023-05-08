@@ -126,14 +126,6 @@ export default function Post(props) {
           whileHover={
           { rotate: [0, 45, 0, -45, 0] }
           }
-          // animate={{ x: -10 }}
-          // transition={{
-          //   delay: 1,
-          //   duration: 1,
-          //   ease: 'easeInOut',
-          //   repeat: Infinity,
-          //   repeatDelay: 0.3,
-          // }}
         >
           <NavLink to="/">
             <Icon icon="material-symbols:arrow-back-ios-new-rounded" color="#ffc700" className="post-icon" />
