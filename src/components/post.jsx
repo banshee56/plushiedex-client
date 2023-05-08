@@ -25,48 +25,66 @@ export default function Post(props) {
     return <div className="page-container">ID: {postID}</div>;
   }
 
-  const handleEditClick = () => {
-    setEditing(!isEditing);
+  const initialPost = {
+    title: post.title, content: post.content, coverUrl: post.coverURL, tags: post.tags,
   };
 
-  const updateField = (event, field) => {
-    if (field === 'name') {
-      const updated = {
-        title: event.target.value, content: post.content, coverUrl: post.coverURL, tags: post.tags,
-      };
-      dispatch(updatePost(updated, postID));
+  const [updated, setUpdated] = useState(initialPost);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    console.log(name);
+    console.log(value);
+    setUpdated({
+      ...updated,
+      [name]: value,
+    });
+  };
+
+  const updateField = () => {
+    const fields = {
+      title: updated.title, content: updated.content, coverUrl: updated.coverURL, tags: updated.tags,
+    };
+    dispatch(updatePost(fields, postID));
+  };
+
+  const handleEditClick = () => {
+    setEditing(!isEditing);
+
+    if (isEditing) {
+      updateField();
     }
   };
 
   const renderContent = () => {
     if (isEditing) {
       return (
-        <div className="column-container">
-          <div className="label-input">
-            <label htmlFor="name"> Name:<input type="text" className="textbox" id="name" onChange={(e) => updateField(e, 'name')} /></label>
-          </div>
+        <form className="column-container">
+          <label htmlFor="name">
+            Name:
+            <input type="text" className="textbox" name="title" onChange={handleInputChange} />
+          </label>
 
           <label htmlFor="photo-url">
             Photo URL:
-            <input type="text" className="textbox" id="photo-url" onChange={(e) => updateField(e, 'photo-url')} />
+            <input type="text" className="textbox" name="coverURL" onChange={handleInputChange} />
           </label>
 
           <label htmlFor="tags">
             Tags:
-            <input type="text" className="textbox" id="tags" onChange={(e) => updateField(e, 'tags')} />
+            <input type="text" className="textbox" name="tags" onChange={handleInputChange} />
           </label>
 
           <label htmlFor="tags">
             Description:
             <textarea
-              id="content"
+              name="content"
               className="content-textbox"
-              value={post.content}
-              onChange={(e) => updateField(e, 'content')}
+              onChange={handleInputChange}
             />
           </label>
 
-        </div>
+        </form>
 
       );
     } else {
@@ -84,9 +102,24 @@ export default function Post(props) {
   return (
     <div className="page-container">
       <div className="icon-bar">
-        <NavLink to="/">
-          <Icon icon="material-symbols:arrow-back-ios-new-rounded" color="#ffc700" className="post-icon" />
-        </NavLink>
+        <motion.div
+          transition={{ duration: 1 }}
+          whileHover={
+          { rotate: [0, 45, 0, -45, 0] }
+          }
+          // animate={{ x: -10 }}
+          // transition={{
+          //   delay: 1,
+          //   duration: 1,
+          //   ease: 'easeInOut',
+          //   repeat: Infinity,
+          //   repeatDelay: 0.3,
+          // }}
+        >
+          <NavLink to="/">
+            <Icon icon="material-symbols:arrow-back-ios-new-rounded" color="#ffc700" className="post-icon" />
+          </NavLink>
+        </motion.div>
         <div>
           <Icon icon="material-symbols:edit" color="#ffc700" className="post-icon" onClick={handleEditClick} />
           <Icon icon="mdi:delete" color="#ffc700" className="post-icon" onClick={() => dispatch(deletePost(postID, navigate))} />

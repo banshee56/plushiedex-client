@@ -8,6 +8,7 @@ const API_KEY = '?key=b_ireen';
 export const ActionTypes = {
   FETCH_POSTS: 'FETCH_POSTS',
   FETCH_POST: 'FETCH_POST',
+  UPDATE_POST: 'UPDATE_POST',
 };
 
 // action creators
@@ -54,7 +55,11 @@ export function updatePost(post, id) { /* axios put */
 
   return async (dispatch) => {
     // put
-    axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, fields).then(dispatch(fetchPost(id)));
+    const result = await axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, fields);
+    dispatch({
+      type: ActionTypes.UPDATE_POST,
+      payload: result.data,
+    });
   };
 }
 

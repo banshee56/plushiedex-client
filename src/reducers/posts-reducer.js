@@ -10,13 +10,16 @@ const initialState = {
 const PostsReducer = produce((draftState, action = {}) => {
   console.log(3);
   console.log('reducer');
-  // console.log(action.payload);
   switch (action.type) {
     case ActionTypes.FETCH_POSTS:
       draftState.all = action.payload;
       break;
 
     case ActionTypes.FETCH_POST:
+      draftState.current = action.payload;
+      break;
+
+    case ActionTypes.UPDATE_POST:
       draftState.current = action.payload;
       break;
 
