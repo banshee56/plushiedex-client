@@ -25,46 +25,48 @@ export default function Post(props) {
     return <div className="page-container">ID: {postID}</div>;
   }
 
-  const initialPost = {
-    title: post.title, content: post.content, coverUrl: post.coverURL, tags: post.tags,
-  };
-
-  // const [updated, setUpdated] = useState(initialPost);
-
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   console.log(name);
-  //   console.log(value);
-  //   setUpdated({
-  //     ...updated,
-  //     [name]: value,
-  //   });
-  // };
-
   const updateTitle = (e) => {
+    let newVal = e.target.value;
+    if (!newVal) {
+      newVal = ' ';
+    }
     const fields = {
-      title: e.target.value, content: post.content, coverUrl: post.coverURL, tags: post.tags,
+      title: newVal, content: post.content, coverUrl: post.coverURL, tags: post.tags,
     };
     dispatch(updatePost(fields, postID));
   };
 
   const updateContent = (e) => {
+    let newVal = e.target.value;
+    if (!newVal) {
+      newVal = ' ';
+    }
+
     const fields = {
-      title: post.title, content: e.target.value, coverUrl: post.coverURL, tags: post.tags,
+      title: post.title, content: newVal, coverUrl: post.coverURL, tags: post.tags,
     };
     dispatch(updatePost(fields, postID));
   };
 
   const updateCover = (e) => {
+    let newVal = e.target.value;
+    if (!newVal) {
+      newVal = ' ';
+    }
+
     const fields = {
-      title: post.title, content: post.content, coverUrl: e.target.value, tags: post.tags,
+      title: post.title, content: post.content, coverUrl: newVal, tags: post.tags,
     };
     dispatch(updatePost(fields, postID));
   };
 
   const updateTags = (e) => {
+    let newVal = e.target.value;
+    if (!newVal) {
+      newVal = ' ';
+    }
     const fields = {
-      title: post.title, content: post.content, coverUrl: post.coverUrl, tags: e.target.value,
+      title: post.title, content: post.content, coverUrl: post.coverUrl, tags: newVal,
     };
     dispatch(updatePost(fields, postID));
   };
@@ -79,24 +81,24 @@ export default function Post(props) {
         <form className="column-container">
           <label htmlFor="name">
             Name:
-            <input type="text" className="textbox" name="title" onChange={updateTitle} />
+            <input type="text" value={post.title} name="title" onChange={updateTitle} />
           </label>
 
           <label htmlFor="photo-url">
             Photo URL:
-            <input type="text" className="textbox" name="coverURL" onChange={updateCover} />
+            <input type="text" value={post.coverUrl} name="coverURL" onChange={updateCover} />
           </label>
 
           <label htmlFor="tags">
             Tags:
-            <input type="text" className="textbox" name="tags" onChange={updateTags} />
+            <input type="text" value={post.tags} name="tags" onChange={updateTags} />
           </label>
 
           <label htmlFor="content">
             Description:
             <textarea
               name="content"
-              className="content-textbox"
+              value={post.content}
               onChange={updateContent}
             />
           </label>
