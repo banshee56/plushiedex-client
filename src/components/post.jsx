@@ -41,19 +41,15 @@ export default function Post(props) {
     });
   };
 
-  const updateField = () => {
+  const updateTitle = (e) => {
     const fields = {
-      title: updated.title, content: updated.content, coverUrl: updated.coverURL, tags: updated.tags,
+      title: e.target.value, content: updated.content, coverUrl: updated.coverURL, tags: updated.tags,
     };
     dispatch(updatePost(fields, postID));
   };
 
   const handleEditClick = () => {
     setEditing(!isEditing);
-
-    if (isEditing) {
-      updateField();
-    }
   };
 
   const renderContent = () => {
@@ -62,7 +58,7 @@ export default function Post(props) {
         <form className="column-container">
           <label htmlFor="name">
             Name:
-            <input type="text" className="textbox" name="title" onChange={handleInputChange} />
+            <input type="text" value={post.title} className="textbox" name="title" onChange={updateTitle} />
           </label>
 
           <label htmlFor="photo-url">
