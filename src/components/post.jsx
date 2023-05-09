@@ -133,11 +133,26 @@ export default function Post(props) {
 
       );
     } else {
+      const showCover = () => {
+        if (post.coverUrl) {
+          return <img src={post.coverUrl} className="cover-photo" alt="cover" />;
+        }
+        return null;
+      };
+
+      const showContent = () => {
+        if (post.content) {
+          return <ReactMarkdown className="post-text">{post.content}</ReactMarkdown>;
+        }
+        return null;
+      };
       return (
         <div className="post-container">
           <h1>{post.title}</h1>
-          <img src={post.coverUrl} className="cover-photo" alt="cover" />
-          <ReactMarkdown className="post-text">{post.content}</ReactMarkdown>
+          {showCover()}
+          {showContent()}
+          {/* <img src={post.coverUrl} className="cover-photo" alt="cover" />
+          <ReactMarkdown className="post-text">{post.content}</ReactMarkdown> */}
           <p className="tags">{post.tags}</p>
         </div>
       );

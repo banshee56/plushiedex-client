@@ -26,6 +26,13 @@ export default function Posts(props) {
 
       <div className="posts">
         { allPosts.map((post) => {
+          // shows an image if a url is given, does not check for validity however
+          const showCover = () => {
+            if (post.coverUrl) {
+              return <img src={post.coverUrl} width={200} alt="profile" />;
+            }
+            return null;
+          };
           return (
             <div key={post.id}>
               <Link to={`/posts/${post.id}`}>
@@ -38,7 +45,7 @@ export default function Posts(props) {
                   className="post"
                 >
                   <h1>{post.title}</h1>
-                  <img src={post.coverUrl} width={200} alt="profile" />
+                  {showCover()}
                   <p>{post.tags}</p>
                 </motion.div>
               </Link>
