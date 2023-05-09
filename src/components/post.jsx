@@ -77,30 +77,53 @@ export default function Post(props) {
     setEditing(!isEditing);
   };
 
+  const showEditIcon = () => {
+    if (isEditing) {
+      return (
+        <motion.div
+          transition={{ duration: 1 }}
+          whileHover={{ rotate: [0, 360] }}
+        >
+          <Icon icon="teenyicons:tick-circle-solid" color="#ffc700" className="post-icon" onClick={handleEditClick} />
+        </motion.div>
+      );
+    } else {
+      return (
+        <motion.div
+          transition={{ duration: 1 }}
+          whileHover={
+          { rotate: [0, 360] }
+        }
+        >
+          <Icon icon="material-symbols:edit" color="#ffc700" className="post-icon" onClick={handleEditClick} />
+        </motion.div>
+      );
+    }
+  };
+
   const renderContent = () => {
     if (isEditing) {
       return (
         <form className="column-container">
           <label htmlFor="name">
             Name:
-            <input type="text" value={post.title} name="title" onChange={updateTitle} className="input" />
+            <input type="text" defaultValue={post.title} name="title" onChange={updateTitle} className="input" />
           </label>
 
           <label htmlFor="photo-url">
             Photo URL:
-            <input type="text" value={post.coverUrl} name="coverURL" onChange={updateCover} className="input" />
+            <input type="text" defaultValue={post.coverUrl} name="coverURL" onChange={updateCover} className="input" />
           </label>
 
           <label htmlFor="tags">
             Tags:
-            <input type="text" value={post.tags} name="tags" onChange={updateTags} className="input" />
+            <input type="text" defaultValue={post.tags} name="tags" onChange={updateTags} className="input" />
           </label>
 
-          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           Description:<br />
           <TextareaAutosize
             name="content"
-            value={post.content}
+            defaultValue={post.content}
             type="text"
             onChange={updateContent}
             className="input-content"
@@ -113,7 +136,7 @@ export default function Post(props) {
       return (
         <div className="post-container">
           <h1>{post.title}</h1>
-          <img src={post.coverUrl} className="cover-photo" />
+          <img src={post.coverUrl} className="cover-photo" alt="cover" />
           <ReactMarkdown className="post-text">{post.content}</ReactMarkdown>
           <p className="tags">{post.tags}</p>
         </div>
@@ -126,17 +149,22 @@ export default function Post(props) {
       <div className="icon-bar">
         <motion.div
           transition={{ duration: 1 }}
-          whileHover={
-          { rotate: [0, 45, 0, -45, 0] }
-          }
+          whileHover={{ rotate: [0, 45, 0, -45, 0] }}
         >
           <NavLink to="/">
             <Icon icon="material-symbols:arrow-back-ios-new-rounded" color="#ffc700" className="post-icon" />
           </NavLink>
         </motion.div>
-        <div>
-          <Icon icon="material-symbols:edit" color="#ffc700" className="post-icon" onClick={handleEditClick} />
-          <Icon icon="mdi:delete" color="#ffc700" className="post-icon" onClick={() => dispatch(deletePost(postID, navigate))} />
+        <div className="edit-delete">
+          {showEditIcon()}
+
+          <motion.div
+            transition={{ duration: 1 }}
+            whileHover={{ rotate: [0, 360] }}
+          >
+            <Icon icon="mdi:delete" color="#ffc700" className="post-icon" onClick={() => dispatch(deletePost(postID, navigate))} />
+
+          </motion.div>
         </div>
 
       </div>

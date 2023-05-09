@@ -14,9 +14,6 @@ export const ActionTypes = {
 // action creators
 export function fetchPosts() {
   return async (dispatch) => {
-    console.log(2);
-    console.log('actionCreator');
-
     try {
       const response = await axios.get(`${ROOT_URL}/posts${API_KEY}`);
       dispatch({ type: ActionTypes.FETCH_POSTS, payload: response.data });
@@ -29,11 +26,15 @@ export function fetchPosts() {
 export function fetchPost(id) { /* axios get */
   return async (dispatch) => {
     // get
-    const result = await axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`);
-    dispatch({
-      type: ActionTypes.FETCH_POST,
-      payload: result.data,
-    });
+    try {
+      const result = await axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`);
+      dispatch({
+        type: ActionTypes.FETCH_POST,
+        payload: result.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
 
@@ -43,8 +44,12 @@ export function createPost(post, navigate) { /* axios post */
     title: post.title, content: post.content, coverUrl: post.coverURL, tags: post.tags,
   };
   return async (dispatch) => {
-    axios.post(`${ROOT_URL}/posts${API_KEY}`, fields).then(dispatch(fetchPosts()));
-    navigate('/'); // navigate to Posts page
+    try {
+      axios.post(`${ROOT_URL}/posts${API_KEY}`, fields).then(dispatch(fetchPosts()));
+      navigate('/'); // navigate to Posts page
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
 
@@ -54,12 +59,16 @@ export function updatePost(post, id) { /* axios put */
   };
 
   return async (dispatch) => {
-    // put
-    const result = await axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, fields);
-    dispatch({
-      type: ActionTypes.UPDATE_POST,
-      payload: result.data,
-    });
+    try {
+      // put
+      const result = await axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, fields);
+      dispatch({
+        type: ActionTypes.UPDATE_POST,
+        payload: result.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
 

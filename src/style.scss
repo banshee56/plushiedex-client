@@ -79,6 +79,10 @@ a {
   padding: 1em;
   margin: 0;
 
+  &:hover, &:focus {
+    box-shadow: 0 0 15px 4px rgba($color: #FFC700, $alpha: 0.5);
+  }
+
   &::placeholder {
     font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -89,6 +93,7 @@ a {
 }
 
 .content-textbox {
+  font-family: "Roboto", sans-serif;
   &::placeholder { padding: 0; }
 }
 
@@ -166,6 +171,11 @@ a {
     height: 30px;
     cursor: pointer;
   }
+
+  .edit-delete {
+    display: flex;
+    gap: 1em;
+  }
 }
 
 // as displayed on post page
@@ -173,6 +183,7 @@ a {
   margin: 2em;
   display: flex;
   flex-direction: column;
+  gap: 1em;
 
   h1 {
     font-size:48px;
@@ -216,13 +227,15 @@ a {
     border-radius: 10px;
     color: #FFC700;
     font-size: 24px;
+    font-family: "Roboto", sans-serif;
+    padding: 1em;
 
     &:hover, &:focus {
       box-shadow: 0 0 15px 4px rgba($color: #FFC700, $alpha: 0.5);
     }
   }
 
-  different styling for content input box
+  // different styling for content input box
   .input-content {
     margin-left: 0;
     width: 90%;

@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useDispatch } from 'react-redux';
+import TextareaAutosize from 'react-textarea-autosize';
 import { createPost } from '../actions';
 
 export default function NewPost() {
@@ -28,7 +29,7 @@ export default function NewPost() {
       </div>
 
       <input type="textbox" placeholder="Tags" className="textbox" id="tags" />
-      <textarea
+      <TextareaAutosize
         id="content"
         className="content-textbox"
         placeholder="Describe Your New Plushie"
