@@ -55,9 +55,9 @@ export function createPost(post, navigate) { /* axios post */
 
 export function updatePost(post, id) { /* axios put */
   const fields = {
-    title: post.title, content: post.content, coverUrl: post.coverURL, tags: post.tags,
+    title: post.title, content: post.content, coverUrl: post.coverUrl, tags: post.tags,
   };
-
+  console.log(fields);
   return async (dispatch) => {
     try {
       // put
