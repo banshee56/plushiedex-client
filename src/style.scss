@@ -190,10 +190,44 @@ a {
 
   .post-text {
     font-size: 24px;
+    padding: 1em;
+    border-radius: 30px;
+    background-color: #FFC700;
+    color: white;
+    width: fit-content;
+  }
+
+  .tags {
+    font-size: 17px;
+    font-weight: bold;
   }
 }
 
+// for edit page
 .column-container {
   display: flex;
   flex-direction: column;
+  font-size: 24px;
+
+  .input, .input-content {
+    width: 80%;
+    margin: 0.6em;
+    border: none;
+    border-radius: 10px;
+    color: #FFC700;
+    font-size: 24px;
+
+    &:hover, &:focus {
+      box-shadow: 0 0 15px 4px rgba($color: #FFC700, $alpha: 0.5);
+    }
+  }
+
+  different styling for content input box
+  .input-content {
+    margin-left: 0;
+    width: 90%;
+  }
+    
 }
+
+

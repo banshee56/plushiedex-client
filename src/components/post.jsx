@@ -5,6 +5,7 @@ import { useParams, NavLink, useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import ReactMarkdown from 'react-markdown';
 import { motion } from 'framer-motion';
+import TextareaAutosize from 'react-textarea-autosize';
 import { deletePost, fetchPost, updatePost } from '../actions';
 
 export default function Post(props) {
@@ -26,6 +27,7 @@ export default function Post(props) {
   }
 
   const updateTitle = (e) => {
+    e.preventDefault();
     let newVal = e.target.value;
     if (!newVal) {
       newVal = ' ';
@@ -81,27 +83,28 @@ export default function Post(props) {
         <form className="column-container">
           <label htmlFor="name">
             Name:
-            <input type="text" value={post.title} name="title" onChange={updateTitle} />
+            <input type="text" value={post.title} name="title" onChange={updateTitle} className="input" />
           </label>
 
           <label htmlFor="photo-url">
             Photo URL:
-            <input type="text" value={post.coverUrl} name="coverURL" onChange={updateCover} />
+            <input type="text" value={post.coverUrl} name="coverURL" onChange={updateCover} className="input" />
           </label>
 
           <label htmlFor="tags">
             Tags:
-            <input type="text" value={post.tags} name="tags" onChange={updateTags} />
+            <input type="text" value={post.tags} name="tags" onChange={updateTags} className="input" />
           </label>
 
-          <label htmlFor="content">
-            Description:
-            <textarea
-              name="content"
-              value={post.content}
-              onChange={updateContent}
-            />
-          </label>
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+          Description:<br />
+          <TextareaAutosize
+            name="content"
+            value={post.content}
+            type="text"
+            onChange={updateContent}
+            className="input-content"
+          />
 
         </form>
 
@@ -112,7 +115,7 @@ export default function Post(props) {
           <h1>{post.title}</h1>
           <img src={post.coverUrl} className="cover-photo" />
           <ReactMarkdown className="post-text">{post.content}</ReactMarkdown>
-          <p>{post.tags}</p>
+          <p className="tags">{post.tags}</p>
         </div>
       );
     }
