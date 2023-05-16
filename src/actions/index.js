@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const ROOT_URL = 'https://platform.cs52.me/api';
+const ROOT_URL = 'http://localhost:9090/api';
+// const ROOT_URL = 'https://platform.cs52.me/api';
 const API_KEY = '?key=b_ireen';
 
 // keys for actiontypes
@@ -44,8 +45,7 @@ export function createPost(post, navigate) { /* axios post */
   };
   return async (dispatch) => {
     try {
-      axios.post(`${ROOT_URL}/posts${API_KEY}`, fields).then(dispatch(fetchPosts()));
-      navigate('/'); // navigate to Posts page
+      axios.post(`${ROOT_URL}/posts${API_KEY}`, fields).then(dispatch(fetchPosts())).then(navigate('/')); // navigate to Posts page
     } catch (error) {
       console.log(error);
     }
@@ -74,7 +74,6 @@ export function updatePost(post, id) { /* axios put */
 export function deletePost(id, navigate) { /* axios delete */
   return async (dispatch) => {
     // delete
-    axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`).then(dispatch(fetchPosts()));
-    navigate('/'); // navigate to Posts page
+    axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`).then(dispatch(fetchPosts())).then(navigate('/')); // navigate to Posts page
   };
 }
