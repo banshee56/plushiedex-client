@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const ROOT_URL = 'http://localhost:9090/api';
+const ROOT_URL = 'https://plushiedexapi.onrender.com/api';
+// const ROOT_URL = 'http://localhost:9090/api';
 // const ROOT_URL = 'https://platform.cs52.me/api';
 const API_KEY = '?key=b_ireen';
 
@@ -16,7 +17,7 @@ export function fetchPosts() {
   return async (dispatch) => {
     try {
       const response = await axios.get(`${ROOT_URL}/posts${API_KEY}`);
-      dispatch({ type: ActionTypes.FETCH_POSTS, payload: response.data });
+      await dispatch({ type: ActionTypes.FETCH_POSTS, payload: response.data });
     } catch (error) {
       console.log(error);
     }
@@ -28,7 +29,7 @@ export function fetchPost(id) { /* axios get */
     // get
     try {
       const result = await axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`);
-      dispatch({
+      await dispatch({
         type: ActionTypes.FETCH_POST,
         payload: result.data,
       });
@@ -61,7 +62,7 @@ export function updatePost(post, id) { /* axios put */
     try {
       // put
       const result = await axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, fields);
-      dispatch({
+      await dispatch({
         type: ActionTypes.UPDATE_POST,
         payload: result.data,
       });
@@ -74,6 +75,6 @@ export function updatePost(post, id) { /* axios put */
 export function deletePost(id, navigate) { /* axios delete */
   return async (dispatch) => {
     // delete
-    axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`).then(dispatch(fetchPosts())).then(navigate('/')); // navigate to Posts page
+    await axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`).then(dispatch(fetchPosts())).then(navigate('/')); // navigate to Posts page
   };
 }
