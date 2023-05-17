@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams, NavLink, useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';
-import ReactMarkdown from 'react-markdown';
 import { motion } from 'framer-motion';
-import TextareaAutosize from 'react-textarea-autosize';
-import { deletePost, fetchPost, updatePost } from '../actions';
+import { deletePost, updatePost } from '../actions';
 
 export default function IconBar(props) {
   const { postID } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleEditClick = () => {
+  const handleEditClick = async () => {
+    // submit
     if (props.page === 'edit') {
+      await dispatch(updatePost(props.fields, postID));
       navigate(`/posts/${postID}`);
-    } else {
+    } else { // edit
       navigate(`/posts/${postID}/edit`);
     }
   };
