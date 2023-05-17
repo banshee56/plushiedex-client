@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import { motion } from 'framer-motion';
 import TextareaAutosize from 'react-textarea-autosize';
 import { deletePost, fetchPost, updatePost } from '../actions';
+import IconBar from './iconbar';
 
 export default function Post(props) {
   const { postID } = useParams();
@@ -25,165 +26,87 @@ export default function Post(props) {
     return <div className="page-container">ID: {postID}</div>;
   }
 
-  const updateTitle = (e) => {
-    e.preventDefault();
-    let newVal = e.target.value;
-    if (!newVal) {
-      newVal = ' ';
+  // const renderContent = () => {
+  //   if (isEditing) {
+  //     return (
+  //       <form className="column-container">
+  //         <label htmlFor="name">
+  //           Name:
+  //           <input type="text" defaultValue={post.title} name="title" onChange={updateTitle} className="input" />
+  //         </label>
+
+  //         <label htmlFor="photo-url">
+  //           Photo URL:
+  //           <input type="text" defaultValue={post.coverUrl} name="coverURL" onChange={updateCover} className="input" />
+  //         </label>
+
+  //         <label htmlFor="tags">
+  //           Tags:
+  //           <input type="text" defaultValue={post.tags} name="tags" onChange={updateTags} className="input" />
+  //         </label>
+
+  //         Description:<br />
+  //         <TextareaAutosize
+  //           name="content"
+  //           defaultValue={post.content}
+  //           type="text"
+  //           onChange={updateContent}
+  //           className="input-content"
+  //         />
+
+  //       </form>
+
+  //     );
+  //   } else {
+  //     const showCover = () => {
+  //       if (post.coverUrl) {
+  //         return <img src={post.coverUrl} className="cover-photo" alt="cover" />;
+  //       }
+  //       return null;
+  //     };
+
+  //     const showContent = () => {
+  //       if (post.content) {
+  //         return <ReactMarkdown className="post-text">{post.content}</ReactMarkdown>;
+  //       }
+  //       return null;
+  //     };
+  //     return (
+  //       <div className="post-container">
+  //         <h1>{post.title}</h1>
+  //         {showCover()}
+  //         {showContent()}
+  //         {/* <img src={post.coverUrl} className="cover-photo" alt="cover" />
+  //         <ReactMarkdown className="post-text">{post.content}</ReactMarkdown> */}
+  //         <p className="tags">{post.tags}</p>
+  //       </div>
+  //     );
+  //   }
+  // };
+
+  const showCover = () => {
+    if (post.coverUrl) {
+      return <img src={post.coverUrl} className="cover-photo" alt="cover" />;
     }
-    const fields = {
-      title: newVal, content: post.content, coverUrl: post.coverURL, tags: post.tags,
-    };
-    dispatch(updatePost(fields, postID));
+    return null;
   };
 
-  const updateContent = (e) => {
-    let newVal = e.target.value;
-    if (!newVal) {
-      newVal = ' ';
+  const showContent = () => {
+    if (post.content) {
+      return <ReactMarkdown className="post-text">{post.content}</ReactMarkdown>;
     }
-
-    const fields = {
-      title: post.title, content: newVal, coverUrl: post.coverURL, tags: post.tags,
-    };
-    dispatch(updatePost(fields, postID));
-  };
-
-  const updateCover = (e) => {
-    let newVal = e.target.value;
-    if (!newVal) {
-      newVal = ' ';
-    }
-
-    const fields = {
-      title: post.title, content: post.content, coverUrl: newVal, tags: post.tags,
-    };
-    dispatch(updatePost(fields, postID));
-  };
-
-  const updateTags = (e) => {
-    let newVal = e.target.value;
-    if (!newVal) {
-      newVal = ' ';
-    }
-    const fields = {
-      title: post.title, content: post.content, coverUrl: post.coverUrl, tags: newVal,
-    };
-    dispatch(updatePost(fields, postID));
-  };
-
-  const handleEditClick = () => {
-    setEditing(!isEditing);
-  };
-
-  const showEditIcon = () => {
-    if (isEditing) {
-      return (
-        <motion.div
-          transition={{ duration: 1 }}
-          whileHover={{ rotate: [0, 360] }}
-        >
-          <Icon icon="teenyicons:tick-circle-solid" color="#ffc700" className="post-icon" onClick={handleEditClick} />
-        </motion.div>
-      );
-    } else {
-      return (
-        <motion.div
-          transition={{ duration: 1 }}
-          whileHover={
-          { rotate: [0, 360] }
-        }
-        >
-          <Icon icon="material-symbols:edit" color="#ffc700" className="post-icon" onClick={handleEditClick} />
-        </motion.div>
-      );
-    }
-  };
-
-  const renderContent = () => {
-    if (isEditing) {
-      return (
-        <form className="column-container">
-          <label htmlFor="name">
-            Name:
-            <input type="text" defaultValue={post.title} name="title" onChange={updateTitle} className="input" />
-          </label>
-
-          <label htmlFor="photo-url">
-            Photo URL:
-            <input type="text" defaultValue={post.coverUrl} name="coverURL" onChange={updateCover} className="input" />
-          </label>
-
-          <label htmlFor="tags">
-            Tags:
-            <input type="text" defaultValue={post.tags} name="tags" onChange={updateTags} className="input" />
-          </label>
-
-          Description:<br />
-          <TextareaAutosize
-            name="content"
-            defaultValue={post.content}
-            type="text"
-            onChange={updateContent}
-            className="input-content"
-          />
-
-        </form>
-
-      );
-    } else {
-      const showCover = () => {
-        if (post.coverUrl) {
-          return <img src={post.coverUrl} className="cover-photo" alt="cover" />;
-        }
-        return null;
-      };
-
-      const showContent = () => {
-        if (post.content) {
-          return <ReactMarkdown className="post-text">{post.content}</ReactMarkdown>;
-        }
-        return null;
-      };
-      return (
-        <div className="post-container">
-          <h1>{post.title}</h1>
-          {showCover()}
-          {showContent()}
-          {/* <img src={post.coverUrl} className="cover-photo" alt="cover" />
-          <ReactMarkdown className="post-text">{post.content}</ReactMarkdown> */}
-          <p className="tags">{post.tags}</p>
-        </div>
-      );
-    }
+    return null;
   };
 
   return (
     <div className="page-container">
-      <div className="icon-bar">
-        <motion.div
-          transition={{ duration: 1 }}
-          whileHover={{ rotate: [0, 45, 0, -45, 0] }}
-        >
-          <NavLink to="/">
-            <Icon icon="material-symbols:arrow-back-ios-new-rounded" color="#ffc700" className="post-icon" />
-          </NavLink>
-        </motion.div>
-        <div className="edit-delete">
-          {showEditIcon()}
-
-          <motion.div
-            transition={{ duration: 1 }}
-            whileHover={{ rotate: [0, 360] }}
-          >
-            <Icon icon="mdi:delete" color="#ffc700" className="post-icon" onClick={() => dispatch(deletePost(postID, navigate))} />
-
-          </motion.div>
-        </div>
-
+      <IconBar />
+      <div className="post-container">
+        <h1>{post.title}</h1>
+        {showCover()}
+        {showContent()}
+        <p className="tags">{post.tags}</p>
       </div>
-
-      {renderContent()}
 
     </div>
   );
