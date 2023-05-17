@@ -16,35 +16,64 @@ export default function Post(props) {
 
   useEffect(() => {
     const fetch = async () => {
-      dispatch(fetchPost(postID));
+      await dispatch(fetchPost(postID));
     };
-    console.log('fetching');
     fetch();
   }, []);
 
   if (!post) {
     return <div className="page-container">ID: {postID}</div>;
   }
-  const [fields, setFields] = useState({
-    title: post.title, content: post.content, coverUrl: post.coverURL, tags: post.tags,
-  });
 
-  const handleUpdate = async (e) => {
+  const updateTitle = (e) => {
     e.preventDefault();
-    const { value } = e.target;
-    setFields({
-      ...fields,
-      [e.target.name]: value,
-    });
+    let newVal = e.target.value;
+    if (!newVal) {
+      newVal = ' ';
+    }
+    const fields = {
+      title: newVal, content: post.content, coverUrl: post.coverURL, tags: post.tags,
+    };
+    dispatch(updatePost(fields, postID));
+  };
+
+  const updateContent = (e) => {
+    let newVal = e.target.value;
+    if (!newVal) {
+      newVal = ' ';
+    }
+
+    const fields = {
+      title: post.title, content: newVal, coverUrl: post.coverURL, tags: post.tags,
+    };
+    dispatch(updatePost(fields, postID));
+  };
+
+  const updateCover = (e) => {
+    let newVal = e.target.value;
+    if (!newVal) {
+      newVal = ' ';
+    }
+
+    const fields = {
+      title: post.title, content: post.content, coverUrl: newVal, tags: post.tags,
+    };
+    dispatch(updatePost(fields, postID));
+  };
+
+  const updateTags = (e) => {
+    let newVal = e.target.value;
+    if (!newVal) {
+      newVal = ' ';
+    }
+    const fields = {
+      title: post.title, content: post.content, coverUrl: post.coverUrl, tags: newVal,
+    };
+    dispatch(updatePost(fields, postID));
   };
 
   const handleEditClick = () => {
-    setEditing(true);
-  };
-
-  const handleSubmit = async () => {
-    setEditing(false);
-    await dispatch(updatePost(fields, postID));
+    setEditing(!isEditing);
   };
 
   const showEditIcon = () => {
@@ -54,7 +83,7 @@ export default function Post(props) {
           transition={{ duration: 1 }}
           whileHover={{ rotate: [0, 360] }}
         >
-          <Icon icon="teenyicons:tick-circle-solid" color="#ffc700" className="post-icon" onClick={handleSubmit} />
+          <Icon icon="teenyicons:tick-circle-solid" color="#ffc700" className="post-icon" onClick={handleEditClick} />
         </motion.div>
       );
     } else {
@@ -77,17 +106,17 @@ export default function Post(props) {
         <form className="column-container">
           <label htmlFor="name">
             Name:
-            <input type="text" defaultValue={post.title} name="title" onChange={handleUpdate} className="input" />
+            <input type="text" defaultValue={post.title} name="title" onChange={updateTitle} className="input" />
           </label>
 
           <label htmlFor="photo-url">
             Photo URL:
-            <input type="text" defaultValue={post.coverUrl} name="coverURL" onChange={handleUpdate} className="input" />
+            <input type="text" defaultValue={post.coverUrl} name="coverURL" onChange={updateCover} className="input" />
           </label>
 
           <label htmlFor="tags">
             Tags:
-            <input type="text" defaultValue={post.tags} name="tags" onChange={handleUpdate} className="input" />
+            <input type="text" defaultValue={post.tags} name="tags" onChange={updateTags} className="input" />
           </label>
 
           Description:<br />
@@ -95,7 +124,7 @@ export default function Post(props) {
             name="content"
             defaultValue={post.content}
             type="text"
-            onChange={handleUpdate}
+            onChange={updateContent}
             className="input-content"
           />
 
