@@ -17,7 +17,7 @@ export function fetchPosts() {
   return async (dispatch) => {
     try {
       const response = await axios.get(`${ROOT_URL}/posts${API_KEY}`);
-      await dispatch({ type: ActionTypes.FETCH_POSTS, payload: response.data });
+      dispatch({ type: ActionTypes.FETCH_POSTS, payload: response.data });
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +29,7 @@ export function fetchPost(id) { /* axios get */
     // get
     try {
       const result = await axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`);
-      await dispatch({
+      dispatch({
         type: ActionTypes.FETCH_POST,
         payload: result.data,
       });
@@ -62,9 +62,9 @@ export function updatePost(post, id) { /* axios put */
     try {
       // put
       const result = await axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, fields);
-      await dispatch({
+      dispatch({
         type: ActionTypes.UPDATE_POST,
-        payload: result.data,
+        payload: fields,
       });
     } catch (error) {
       console.log(error);

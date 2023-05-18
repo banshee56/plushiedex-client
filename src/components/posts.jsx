@@ -9,9 +9,13 @@ export default function Posts(props) {
   const allPosts = useSelector((reduxState) => (reduxState.posts.all));
 
   useEffect(() => {
-    console.log(1);
-    console.log('useEffect');
-    dispatch(fetchPosts());
+    const fetch = async () => {
+      await dispatch(fetchPosts());
+    };
+    fetch();
+    // console.log(1);
+    // console.log('useEffect');
+    // dispatch(fetchPosts());
   }, []);
 
   if (!allPosts) {
