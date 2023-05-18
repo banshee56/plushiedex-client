@@ -46,7 +46,7 @@ export function createPost(post, navigate) { /* axios post */
   };
   return async (dispatch) => {
     try {
-      axios.post(`${ROOT_URL}/posts${API_KEY}`, fields).then(dispatch(fetchPosts())).then(navigate('/')); // navigate to Posts page
+      axios.post(`${ROOT_URL}/posts${API_KEY}`, fields).then(navigate('/')); // navigate to Posts page
     } catch (error) {
       console.log(error);
     }
