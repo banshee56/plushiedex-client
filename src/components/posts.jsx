@@ -13,9 +13,6 @@ export default function Posts(props) {
       await dispatch(fetchPosts());
     };
     fetch();
-    // console.log(1);
-    // console.log('useEffect');
-    // dispatch(fetchPosts());
   }, []);
 
   if (!allPosts) {
@@ -37,6 +34,7 @@ export default function Posts(props) {
             }
             return null;
           };
+
           return (
             <div key={post.id}>
               <Link to={`/posts/${post.id}`}>

@@ -61,7 +61,7 @@ a {
   }
 }
 
-.name-photo {
+.row-fields {
   display: flex;
   gap: 1em;
 
@@ -108,7 +108,7 @@ a {
 }
   
 @media only screen and (max-width: 440px)  {
-  .name-photo {
+  .row-fields {
     flex-direction: column;
 
     input {

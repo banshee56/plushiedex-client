@@ -26,12 +26,12 @@ export default function NewPost() {
   return (
     <div className="page-container">
       <h1>Add New Plushie</h1>
-      <div className="name-photo">
+      <div className="row-fields">
         <input type="textbox" placeholder="Name" className="textbox" id="name" />
         <input type="textbox" placeholder="Profile Photo URL" className="textbox" id="photo-url" />
       </div>
 
-      <div className="name-photo">
+      <div className="row-fields">
         <input type="textbox" placeholder="Gender" className="textbox" id="gender" />
         <input type="textbox" placeholder="Height" className="textbox" id="height" />
         <input type="textbox" placeholder="Weight" className="textbox" id="weight" />
