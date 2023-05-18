@@ -46,7 +46,8 @@ export function createPost(post, navigate) { /* axios post */
   };
   return async (dispatch) => {
     try {
-      axios.post(`${ROOT_URL}/posts${API_KEY}`, fields).then(navigate('/')); // navigate to Posts page
+      const result = await axios.post(`${ROOT_URL}/posts${API_KEY}`, fields);
+      navigate('/'); // navigate to Posts page
     } catch (error) {
       console.log(error);
     }
@@ -57,7 +58,7 @@ export function updatePost(post, id) { /* axios put */
   const fields = {
     title: post.title, content: post.content, coverUrl: post.coverURL, tags: post.tags, gender: post.gender, height: post.height, weight: post.weight,
   };
-  console.log(fields);
+
   return async (dispatch) => {
     try {
       // put
@@ -75,6 +76,7 @@ export function updatePost(post, id) { /* axios put */
 export function deletePost(id, navigate) { /* axios delete */
   return async (dispatch) => {
     // delete
-    await axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`).then(dispatch(fetchPosts())).then(navigate('/')); // navigate to Posts page
+    const result = await axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`);
+    navigate('/'); // navigate to Posts page
   };
 }
