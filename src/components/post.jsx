@@ -41,6 +41,10 @@ export default function Post(props) {
       <div className="post-container">
         <h1>{post.title}</h1>
         {showCover()}
+        {console.log(post)}
+        <div className="tags">{post.gender ? `Gender: ${post.gender}` : null}</div>
+        <div className="tags">{post.height ? `Height: ${post.height}` : null}</div>
+        <div className="tags">{post.weight ? `Weight: ${post.weight}` : null}</div>
         {showContent()}
         <p className="tags">{post.tags}</p>
       </div>

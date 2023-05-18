@@ -39,6 +39,18 @@ export default function Edit() {
           <input type="text" defaultValue={post.coverUrl} name="coverUrl" onChange={handleUpdate} className="input" />
         </label>
 
+        <label htmlFor="gender">
+          Gender: <input type="text" defaultValue={post.gender} name="gender" onChange={handleUpdate} className="input" />
+        </label>
+
+        <label htmlFor="height">
+          Height: <input type="text" defaultValue={post.height} name="height" onChange={handleUpdate} className="input" />
+        </label>
+
+        <label htmlFor="weight">
+          Weight: <input type="text" defaultValue={post.weight} name="weight" onChange={handleUpdate} className="input" />
+        </label>
+
         <label htmlFor="tags">
           Tags:
           <input type="text" defaultValue={post.tags} name="tags" onChange={handleUpdate} className="input" />

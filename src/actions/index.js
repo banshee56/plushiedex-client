@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const ROOT_URL = 'https://plushiedexapi.onrender.com/api';
-// const ROOT_URL = 'http://localhost:9090/api';
+// const ROOT_URL = 'https://plushiedexapi.onrender.com/api';
+const ROOT_URL = 'http://localhost:9090/api';
 // const ROOT_URL = 'https://platform.cs52.me/api';
 const API_KEY = '?key=b_ireen';
 
@@ -42,7 +42,7 @@ export function fetchPost(id) { /* axios get */
 export function createPost(post, navigate) { /* axios post */
   // post
   const fields = {
-    title: post.title, content: post.content, coverUrl: post.coverURL, tags: post.tags,
+    title: post.title, content: post.content, coverUrl: post.coverURL, tags: post.tags, gender: post.gender, height: post.height, weight: post.weight,
   };
   return async (dispatch) => {
     try {
@@ -55,7 +55,7 @@ export function createPost(post, navigate) { /* axios post */
 
 export function updatePost(post, id) { /* axios put */
   const fields = {
-    title: post.title, content: post.content, coverUrl: post.coverUrl, tags: post.tags,
+    title: post.title, content: post.content, coverUrl: post.coverURL, tags: post.tags, gender: post.gender, height: post.height, weight: post.weight,
   };
   console.log(fields);
   return async (dispatch) => {
